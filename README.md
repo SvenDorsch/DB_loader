@@ -18,7 +18,7 @@ Additional users for the database server can for example be created from within 
 
     CREATE LOGIN <login_name> WITH password='<password>';
 
-Then, within each database by running T_SQL queries, we can create a user from the login:
+Then, within each database by running T-SQL queries, we can create a user from the login:
 
     CREATE USER <user_name> FROM LOGIN <login_name>;
 
@@ -36,3 +36,17 @@ Note: To remove a login, we can use
 ## Read and write operations to DB from python ##
 
 Basic read and write operations from python using pandas in connection with the Azure SQL db are found in example_df_operations.py. We use the pyodbc library in combiantion with SQLalchemy.
+
+
+## Database preparation: Table setup ##
+
+Next, we prepare the database for our azure function. We want to only supply credentials with write, not create permissions to the function. Thus, we need to prepare a table beforehand. The table should contain a counting id for each random number generation process (primary key) as well as the associated random number. We use TSQL to create the table:
+
+    CREATE TABLE randomNumbers (
+    process_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    random_number INT NOT NULL,
+    );
+
+The table can be dropped to createa  clean instance of the database by
+
+    DROP TABLE IF EXISTS randomNumbers;
