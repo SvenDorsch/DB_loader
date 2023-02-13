@@ -50,3 +50,21 @@ Next, we prepare the database for our azure function. We want to only supply cre
 The table can be dropped to createa  clean instance of the database by
 
     DROP TABLE IF EXISTS randomNumbers;
+
+
+## Azure functions: Setup local development environment ##
+
+Developing azure functions locally on a M1/M2 Macbook can come with various challenges. It should be noted that running the function locally requires the use of Rosetta2 to emulate an intel architecture. We assume that VScode including the Azure extension, Azurite (run Azurite: Start) and the Azure CLI are installed and running.
+
+We first prepare the system further by creating  zsh commands to activate/deactivate a Rosetta2 emulation for the console following [this](http://issamben.com/running-python-azure-function-locally-on-an-m1-m2/) tutorial. 
+
+Next, we create a virtual python environment in the folder in which we want to develop out azure function. We therefore switch to "intel", deactivate any existing python environment via
+
+    $ conda deactivate
+
+and create and activate a new virtual environment
+
+    $ python3.9 -m venv .venv
+    $ source .venv/bin/activate
+
+As a next step, to be able to interact with databases, we install pyodbc by following [this](https://whodeenie.medium.com/installing-pyodbc-and-unixodbc-for-apple-silicon-8e238ed7f216) tutorial. Next, we install ODBC drivers. Here, we follow [a guide provided by microsoft](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos?view=sql-server-ver15) but replace brew with brew86 to ultilize our rosetta2 emulation.
