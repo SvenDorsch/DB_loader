@@ -87,4 +87,14 @@ to make use of Azurite. Finally, to run our app, use
 
 ### Deployment ###
 
-There exist a variety of methods to deploy a fucntion to a function app.
+There exist a variety of methods to deploy a function to a function app, among other:
+
+1) The app can be deployed directly from the explorer in VS code (right click -> deploy)
+2) Azure CLI
+3) Github actions
+
+**Troubleshooting:**
+
+[Oryx build fail](https://github.com/Azure/functions-action/issues/159)
+
+[Malformed SCM_RUN_FROM_PAKCAGE](https://stackoverflow.com/questions/67580229/azure-functions-deploying-fail-from-vs-code): In this case, likely a connection to the blob storage account is wrong. Recreating the connection may fix the issue.
