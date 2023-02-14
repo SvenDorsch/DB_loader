@@ -3,6 +3,8 @@ import numpy as np
 import os
 import pandas as pd
 
+import logging
+
 from sqlalchemy import create_engine
 
 
@@ -15,7 +17,7 @@ def insert_random_number():
     SERVER = os.getenv('ServerFromKeyVault')
     USER = os.getenv('UsernameFromKeyVault')
     PWD = os.getenv('PasswordFromKeyVault')
-    DRIVER = 'ODBC Driver 18 for SQL Server'
+    DRIVER = 'ODBC Driver 17 for SQL Server'
 
     connection_str = f'mssql+pyodbc://{USER}:{PWD}@{SERVER}:1433/db?driver={DRIVER}'
     engine = create_engine(connection_str)
