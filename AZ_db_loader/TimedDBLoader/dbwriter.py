@@ -1,5 +1,6 @@
 import pyodbc
 import numpy as np
+import os
 import pandas as pd
 
 from sqlalchemy import create_engine
@@ -11,9 +12,9 @@ def insert_random_number():
     Establishes connection to database and adds random number entry
     """
 
-    SERVER = 'functions-test-db-server.database.windows.net'
-    USER = ''
-    PWD = ''
+    SERVER = os.getenv('ServerFromKeyVault')
+    USER = os.getenv('UsernameFromKeyVault')
+    PWD = os.getenv('PasswordFromKeyVault')
     DRIVER = 'ODBC Driver 18 for SQL Server'
 
     connection_str = f'mssql+pyodbc://{USER}:{PWD}@{SERVER}:1433/db?driver={DRIVER}'
