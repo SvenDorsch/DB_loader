@@ -76,7 +76,7 @@ Next, we can use the VS code Azure functions extension to create a local azute f
 
 ## Azure functions: Development and deployment ##
 
-First, we create a new fucntions app in the Azure portal, following [this guide](https://github.com/James-Leslie/azure-functions). Note that a nice explanation of how to access Key Vault secrets can be found [here](https://servian.dev/accessing-azure-key-vault-from-python-functions-44d548b49b37). It should be noted that within the key vaults access policy, our function app requires get and list priviledges for secrets.
+First, we create a new fucntions app in the Azure portal, following [this guide](https://github.com/James-Leslie/azure-functions). Note that a nice explanation of how to access Key Vault secrets can be found [here](https://servian.dev/accessing-azure-key-vault-from-python-functions-44d548b49b37). It should be noted that within the key vaults access policy, our function app requires get and list priviledges for secrets. If access to secrets from within the function app does not work, it is adviseable to switch to an Azure role-based access model. Then, a role (for example secrets user) can be assigned to the function app.
 
 To develop and test the function app locally, we have to start Azurite (f1 in VS code, type Azurite: Start). We further need to modify local.settings.json:
 

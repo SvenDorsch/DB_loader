@@ -3,8 +3,6 @@ import numpy as np
 import os
 import pandas as pd
 
-import logging
-
 from sqlalchemy import create_engine
 
 
