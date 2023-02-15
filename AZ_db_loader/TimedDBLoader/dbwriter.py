@@ -21,6 +21,7 @@ def insert_random_number():
     engine = create_engine(connection_str)
 
     df = pd.DataFrame(columns=['random_number'], data=np.random.randint(100, size=(1)))
+    df.loc[0] = 0  # Test for github actions: Enforce 0 for random number
     df.to_sql('randomNumbers', engine, if_exists='append', index=False)
 
 
