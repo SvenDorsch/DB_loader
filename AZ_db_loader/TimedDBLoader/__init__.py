@@ -5,7 +5,6 @@ import azure.functions as func
 from .dbwriter import insert_random_number
 
 
-
 def main(mytimer: func.TimerRequest) -> None:
     utc_timestamp = datetime.datetime.utcnow().replace(
         tzinfo=datetime.timezone.utc).isoformat()

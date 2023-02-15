@@ -6,24 +6,24 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 
-
 def insert_random_number():
     """
     Establishes connection to database and adds random number entry
     """
 
+    # Get SQL server credentials from KeyVault:
     SERVER = os.getenv('ServerFromKeyVault')
     USER = os.getenv('UsernameFromKeyVault')
     PWD = os.getenv('PasswordFromKeyVault')
     DRIVER = 'ODBC Driver 17 for SQL Server'
 
+    # Prepare server connection
     connection_str = f'mssql+pyodbc://{USER}:{PWD}@{SERVER}:1433/db?driver={DRIVER}'
     engine = create_engine(connection_str)
 
+    # Create pd.DataFrame contianing a single random number:
     df = pd.DataFrame(columns=['random_number'], data=np.random.randint(100, size=(1)))
-    df.loc[0] = 0  # Test for github actions: Enforce 0 for random number
     df.to_sql('randomNumbers', engine, if_exists='append', index=False)
-
 
 
 if __name__ == "__main__":

@@ -101,12 +101,24 @@ Most reliable in building a working python environment is making use of the Azur
     $ func azure functionapp publish <app-name> --build remote
 
 
+**CI with github actions:**
+
+Github actions are useful for deployment. As we push out code to a github repo, it can automatically also be deployed to the Azure functions app. Here, we could further specify a production and test instance of our functions app.
+
+To setup github actions, we add a .github folder to our repo. Within this folder, we create a .yml document, outlining the action to be taken when a new commit is made. Note that this .yml document can be created from within the Azure portal -> function app -> Deployment center (deployment slots to create a test instance).
+
+If our Azure function exists within a sub-folder of the github repo, we set
+
+    env:
+        AZURE_FUNCTIONAPP_PACKAGE_PATH: 'path_to_functionApp/'
+
+
 **Troubleshooting:**
 
-[Oryx build fail](https://github.com/Azure/functions-action/issues/159): Note that this seems connected to a wrong storage account link. For a succesful build of the python environment for the function app, both settings should be set to true.
+[Oryx build fail](https://github.com/Azure/functions-action/issues/159): Note that this seems connected to a broken link between the functions app and its storage account. For a succesful build of the python environment for the function app, both settings should be set to true.
 
-[Malformed SCM_RUN_FROM_PAKCAGE](https://stackoverflow.com/questions/67580229/azure-functions-deploying-fail-from-vs-code): In this case, likely a connection to the blob storage account is wrong. Recreating the connection may fix the issue.
+[Malformed SCM_RUN_FROM_PAKCAGE](https://stackoverflow.com/questions/67580229/azure-functions-deploying-fail-from-vs-code): In this case, likely the connection from the fucntions app to the blob storage account is wrong. Recreating the connection may fix the issue.
 
 To create a working link to a storage account, two options worked:
- 1) create function app and storage account through VS code
- 2) create function app and storage account in Azute portal. Then, enable public access or access for Azure services on storage account. Finally, in the function app configuration, delete AzureWebJobsStorage. Next deployment via VS code will ask for storage account and set the correct link automatically.
+ 1) Create function app and storage account through VS code
+ 2) Create function app and storage account in Azute portal. Then, enable public access or access for Azure services on storage account. Finally, in the function app configuration, delete AzureWebJobsStorage. Next deployment via VS code will ask for storage account and set the correct link automatically.
